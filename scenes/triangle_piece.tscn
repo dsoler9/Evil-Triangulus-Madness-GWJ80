@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfvic4a0uhu8y"]
+[gd_scene load_steps=7 format=3 uid="uid://cg3ex14fpxlll"]
 
-[ext_resource type="Script" uid="uid://d1gtlnfy1but8" path="res://scripts/piece.gd" id="1_a200y"]
-[ext_resource type="Texture2D" uid="uid://d4agq0d8kifqq" path="res://assets/pieces/rectangle.png" id="2_hnebs"]
-[ext_resource type="AudioStream" uid="uid://c7dfetxl22uvc" path="res://assets/sounds/window-squeek-83224.mp3" id="3_x8300"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a200y"]
-size = Vector2(96, 48)
+[ext_resource type="Script" uid="uid://d1gtlnfy1but8" path="res://scripts/piece.gd" id="1_tybd2"]
+[ext_resource type="Texture2D" uid="uid://d0278ypxb7bpn" path="res://assets/pieces/triangle.png" id="2_2hcmp"]
+[ext_resource type="AudioStream" uid="uid://c7dfetxl22uvc" path="res://assets/sounds/window-squeek-83224.mp3" id="3_eo8s3"]
 
 [sub_resource type="Animation" id="Animation_h2rng"]
 length = 0.001
@@ -48,15 +45,15 @@ _data = {
 [node name="RectanglePiece" type="RigidBody2D"]
 input_pickable = true
 mass = 15.0
-script = ExtResource("1_a200y")
+script = ExtResource("1_tybd2")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3.5, 3.5)
-texture = ExtResource("2_hnebs")
+texture = ExtResource("2_2hcmp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_a200y")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-3, -24, -24, 20, 24, 20, 3, -24)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -64,4 +61,4 @@ libraries = {
 }
 
 [node name="GrabSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_x8300")
+stream = ExtResource("3_eo8s3")

@@ -31,6 +31,7 @@ func drop():
 	#print("drop")
 	grabbed = false
 	freeze = false
+	input_pickable = false
 	animations.stop()
 	#grab_sound.stop()
 	emit_signal("piece_placed")

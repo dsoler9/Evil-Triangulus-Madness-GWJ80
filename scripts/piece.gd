@@ -3,10 +3,16 @@ extends RigidBody2D
 var grabbed := false
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var grab_sound: AudioStreamPlayer2D = $GrabSound
+@onready var drop_ray_cast: RayCast2D = $DropRayCast
+@onready var shadow_sprite: Sprite2D = $ShadowSprite
 
 const GRAB_Y_LIMIT = 200
 
 signal piece_placed
+
+func _ready() -> void:
+	get_parent().add_child(shadow_sprite)
+	shadow_sprite.owner = get_parent()
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -21,7 +27,7 @@ func _input_event(viewport, event, shape_idx):
 func _physics_process(delta):
 	if grabbed:
 		var mouse_pos = get_global_mouse_position()
-		# Limitar la Y del mouse si está por debajo del límite
+		
 		if mouse_pos.y > GRAB_Y_LIMIT:
 			mouse_pos.y = GRAB_Y_LIMIT
 		
@@ -29,6 +35,12 @@ func _physics_process(delta):
 			drop()
 		
 		global_transform.origin = mouse_pos
+		if drop_ray_cast.is_colliding():
+			var hit_pos = drop_ray_cast.get_collision_point()
+			var shadow_height = shadow_sprite.texture.get_height() * shadow_sprite.scale.y / 2.0
+			
+			# Reposicionar la sombra justo ENCIMA del punto de colisión
+			shadow_sprite.global_position = hit_pos - Vector2(0, shadow_height)
 	
 
 func grab():
@@ -37,6 +49,7 @@ func grab():
 	freeze = true
 	animations.play("grabbed")
 	#grab_sound.play()
+	shadow_sprite.visible = true
 
 func drop():
 	#print("drop")
@@ -45,5 +58,13 @@ func drop():
 	input_pickable = false
 	animations.stop()
 	#grab_sound.stop()
+	shadow_sprite.visible = false
 	emit_signal("piece_placed")
 	
+func update_shadow_position():
+	if drop_ray_cast.is_colliding():
+		var collision_point = drop_ray_cast.get_collision_point()
+		shadow_sprite.global_position = Vector2(global_position.x, collision_point.y)
+		shadow_sprite.visible = true
+	else:
+		shadow_sprite.visible = false

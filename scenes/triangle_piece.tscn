@@ -62,3 +62,9 @@ libraries = {
 
 [node name="GrabSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_eo8s3")
+
+[node name="DropRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1000)
+
+[node name="DropGuideLine" type="Line2D" parent="."]
+points = PackedVector2Array(1, 0)

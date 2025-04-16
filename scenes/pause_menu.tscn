@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=3 uid="uid://0pdnbiwkpdcd"]
+
+[ext_resource type="Script" uid="uid://dvcp6lmp7arqb" path="res://scripts/pause_menu.gd" id="1_1s2dm"]
+[ext_resource type="Texture2D" uid="uid://cihd6yugsvytu" path="res://assets/menu/Button_Hover_9Slides.png" id="1_v4r4p"]
+[ext_resource type="FontFile" uid="uid://bfwayqtftqj5k" path="res://assets/fonts/PixelOperator8.ttf" id="2_1s2dm"]
+[ext_resource type="Texture2D" uid="uid://cw36jimvw60qu" path="res://assets/menu/Button_Blue_3Slides.png" id="3_88e76"]
+[ext_resource type="Texture2D" uid="uid://ckbb8s1eyxb4i" path="res://assets/menu/Button_Hover_3Slides.png" id="4_knqa7"]
+[ext_resource type="AudioStream" uid="uid://f0h6gh60vqdy" path="res://assets/sounds/discard-sound-effect-221455.mp3" id="5_71k7c"]
+[ext_resource type="AudioStream" uid="uid://c2svuoeqt3yli" path="res://assets/sounds/casual-click-pop-ui-10-262126.mp3" id="6_cmnsq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xtkl"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_23q3d"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s1p3p"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t36m2"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_diaky"]
+content_margin_bottom = 15.0
+texture = ExtResource("4_knqa7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tpxd3"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ob2lm"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f13je"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hot7u"]
+content_margin_bottom = 15.0
+texture = ExtResource("3_88e76")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cx2q2"]
+content_margin_bottom = 15.0
+texture = ExtResource("4_knqa7")
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_1s2dm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.309804)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -192.0
+offset_right = 256.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_v4r4p")
+expand_mode = 4
+
+[node name="ContinueBtn" type="Button" parent="VBoxContainer/TextureRect"]
+layout_mode = 2
+offset_left = 128.0
+offset_top = 116.0
+offset_right = 384.0
+offset_bottom = 204.0
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../QuitBtn")
+focus_neighbor_bottom = NodePath("../QuitBtn")
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_1s2dm")
+theme_override_styles/focus = SubResource("StyleBoxTexture_1xtkl")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_23q3d")
+theme_override_styles/hover = SubResource("StyleBoxTexture_s1p3p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_t36m2")
+theme_override_styles/normal = SubResource("StyleBoxTexture_diaky")
+text = "Continue"
+
+[node name="QuitBtn" type="Button" parent="VBoxContainer/TextureRect"]
+layout_mode = 2
+offset_left = 128.0
+offset_top = 236.0
+offset_right = 384.0
+offset_bottom = 324.0
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../ContinueBtn")
+focus_neighbor_bottom = NodePath("../ContinueBtn")
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_1s2dm")
+theme_override_styles/focus = SubResource("StyleBoxTexture_tpxd3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ob2lm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f13je")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_hot7u")
+theme_override_styles/normal = SubResource("StyleBoxTexture_cx2q2")
+text = "Exit"
+
+[node name="EnterPauseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_71k7c")
+bus = &"SFX"
+
+[node name="ChangeFocusBtnSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_cmnsq")
+bus = &"SFX"
+
+[connection signal="focus_entered" from="VBoxContainer/TextureRect/ContinueBtn" to="." method="_on_continue_btn_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/TextureRect/ContinueBtn" to="." method="_on_continue_btn_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/TextureRect/QuitBtn" to="." method="_on_quit_btn_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/TextureRect/QuitBtn" to="." method="_on_quit_btn_pressed"]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://bar57oyk6qong"]
+
+[ext_resource type="Script" uid="uid://ubxtqfmgy6r2" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="FontFile" uid="uid://ct6fsh4ai4e1c" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_ekxnf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.283856, 0.365504, 0.375415, 1)
+
+[node name="GameTitle" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 118.0
+offset_top = 202.0
+offset_right = 1408.0
+offset_bottom = 466.0
+theme_override_fonts/normal_font = ExtResource("2_ekxnf")
+theme_override_font_sizes/normal_font_size = 130
+bbcode_enabled = true
+text = "[wave]CRAZY BRICKTOWER[/wave]"
+fit_content = true
+metadata/_edit_group_ = true
+
+[node name="GameTitleShadow" type="RichTextLabel" parent="GameTitle"]
+z_index = -1
+layout_mode = 0
+offset_left = -14.0
+offset_right = 1274.0
+offset_bottom = 262.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_ekxnf")
+theme_override_font_sizes/normal_font_size = 130
+bbcode_enabled = true
+text = "[wave]CRAZY BRICKTOWER[/wave]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 626.0
+offset_top = 782.0
+offset_right = 707.0
+offset_bottom = 803.0
+theme_override_fonts/normal_font = ExtResource("2_ekxnf")
+bbcode_enabled = true
+text = "[pulse]START[/pulse]"
+fit_content = true

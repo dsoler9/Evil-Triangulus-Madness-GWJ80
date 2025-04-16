@@ -34,6 +34,11 @@ func _physics_process(delta):
 		if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			drop()
 		
+		if Input.is_action_just_pressed("rotate"):
+			print("rotate")
+			rotate(deg_to_rad(90))
+			drop_ray_cast.rotate(deg_to_rad(-90))
+		
 		global_transform.origin = mouse_pos
 		if drop_ray_cast.is_colliding():
 			var hit_pos = drop_ray_cast.get_collision_point()

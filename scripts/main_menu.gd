@@ -4,26 +4,26 @@ extends Control
 
 var current_color: Color
 var target_color: Color
-var transition_speed := 1.5
+var transition_speed := 0.3
 
 func _ready():
-	current_color = background.color
-	target_color = _generate_random_color()
+	current_color = random_color()
+	target_color = random_color()
+	background.color = current_color
 
 func _process(delta):
 	current_color = current_color.lerp(target_color, delta * transition_speed)
 	background.color = current_color
 	
-	if _colors_are_close(current_color, target_color):
-		target_color = _generate_random_color()
+	if abs(current_color.r - target_color.r) < 0.01 and abs(current_color.g - target_color.g) < 0.01 and abs(current_color.b - target_color.b) < 0.01:
+		target_color = Color(randf(), randf(), randf())
 
-func _generate_random_color() -> Color:
-	return Color(randf_range(0.2, 1.0), randf_range(0.2, 1.0), randf_range(0.2, 1.0), 1.0)
-
-func _colors_are_close(c1: Color, c2: Color, threshold := 0.01) -> bool:
-	return abs(c1.r - c2.r) < threshold \
-		and abs(c1.g - c2.g) < threshold \
-		and abs(c1.b - c2.b) < threshold
+func random_color():
+	return Color(
+		0.3 + randf() * 0.7,  # R entre 0.3 y 1.0
+		0.3 + randf() * 0.7,  # G entre 0.3 y 1.0
+		0.3 + randf() * 0.7   # B entre 0.3 y 1.0
+	)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):

@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0vhsil4b4vdq"]
+
+[ext_resource type="Script" uid="uid://d1gtlnfy1but8" path="res://scripts/piece.gd" id="1_w36bq"]
+[ext_resource type="Texture2D" uid="uid://cidmmbuy4uh36" path="res://assets/pieces/large_rectangle.png" id="2_h27nj"]
+[ext_resource type="AudioStream" uid="uid://c7dfetxl22uvc" path="res://assets/sounds/window-squeek-83224.mp3" id="3_6jtia"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nw5ts"]
+size = Vector2(146, 48)
+
+[sub_resource type="Animation" id="Animation_h2rng"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_s58gp"]
+resource_name = "grabbed"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139626, -0.139626]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m0mde"]
+_data = {
+&"RESET": SubResource("Animation_h2rng"),
+&"grabbed": SubResource("Animation_s58gp")
+}
+
+[node name="LargeRectanglePiece" type="RigidBody2D"]
+input_pickable = true
+mass = 15.0
+script = ExtResource("1_w36bq")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_h27nj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nw5ts")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m0mde")
+}
+
+[node name="GrabSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6jtia")
+
+[node name="DropRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1000)
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 0.619608)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_h27nj")

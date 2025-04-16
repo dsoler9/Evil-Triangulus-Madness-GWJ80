@@ -4,6 +4,7 @@ extends Node
 #@export var piece_scene: PackedScene
 @export var piece_scenes: Array[PackedScene] = []
 @onready var pieces_node: Node2D = $"../Pieces"
+@onready var texture_rect: TextureRect = $"../TextureRect"
 
 var current_piece: RigidBody2D = null
 
@@ -34,7 +35,7 @@ func spawn_piece():
 	## TODO - Have to put it in another position
 	#current_piece.global_position = Vector2(400, 100)
 	#current_piece.freeze = true
-	new_piece.global_position = Vector2(400, 100)
+	new_piece.global_position = Vector2(1848.0, 145.0)
 	new_piece.freeze = true
 	
 	new_piece.connect("piece_placed", Callable(self, "_on_piece_placed"))

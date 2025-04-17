@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://p3i2v8v4qdem"]
+
+[ext_resource type="Script" uid="uid://bgi5d2l65nms0" path="res://scenes/result_menu.gd" id="1_6do8i"]
+[ext_resource type="FontFile" uid="uid://ct6fsh4ai4e1c" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_fc626"]
+[ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/mad_triangle/crazy_triangle_v2.png" id="3_h5jln"]
+[ext_resource type="Texture2D" uid="uid://c4lokrduwe4nq" path="res://assets/cursor/tilemap.png" id="4_h5jln"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl5he"]
+atlas = ExtResource("3_h5jln")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kifo"]
+atlas = ExtResource("3_h5jln")
+region = Rect2(2048, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7vqt"]
+atlas = ExtResource("3_h5jln")
+region = Rect2(4096, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53miw"]
+atlas = ExtResource("3_h5jln")
+region = Rect2(6144, 0, 2048, 2048)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ndsi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl5he")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kifo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7vqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53miw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ResultMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6do8i")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.615686)
+
+[node name="ResultTitle" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 386.0
+offset_top = 212.0
+offset_right = 1585.0
+offset_bottom = 438.0
+theme_override_fonts/normal_font = ExtResource("1_fc626")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[wave][rainbow freq=0.3]YOU WON[/rainbow][/wave]
+ AGAINST [shake rate=20.0 level=20]
+[color=#a020f0]EVIL TRIANGULUS[/color][/shake]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 741.0
+offset_top = 650.0
+offset_right = 989.0
+offset_bottom = 674.0
+theme_override_fonts/font = ExtResource("1_fc626")
+text = "CONTINUE PLAYING"
+
+[node name="ExitBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1091.0
+offset_top = 650.0
+offset_right = 1159.0
+offset_bottom = 674.0
+theme_override_fonts/font = ExtResource("1_fc626")
+text = "EXIT"
+
+[node name="ThanksLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 755.0
+offset_right = 487.0
+offset_bottom = 810.0
+rotation = 0.523599
+theme_override_fonts/normal_font = ExtResource("1_fc626")
+bbcode_enabled = true
+text = "[wave]THANK YOU FOR PLAYING <3[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1548, 739)
+rotation = 0.261799
+scale = Vector2(0.271973, 0.271973)
+sprite_frames = SubResource("SpriteFrames_5ndsi")
+autoplay = "default"
+
+[node name="MouseCursor" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("4_h5jln")
+region_enabled = true
+region_rect = Rect2(255, 100.681, 16.673, 18.2035)
+
+[connection signal="pressed" from="ContinueBtn" to="." method="_on_continue_btn_pressed"]
+[connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]

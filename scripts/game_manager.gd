@@ -11,11 +11,13 @@ const SPAWN_PIECES_POSITIONS = [192.0, 576.0, 1344.0, 1728.0]
 @onready var enemy_ui: CanvasLayer = $EnemyUI
 
 var current_piece: RigidBody2D = null
+var piece_done_damage: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	spawn_piece_timer.start()
+	piece_done_damage = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -30,6 +32,7 @@ func spawn_piece():
 	var scene = piece_scenes[random_index]
 	
 	var new_piece = scene.instantiate()
+	new_piece.add_to_group("Pieces")
 	pieces_node.add_child(new_piece)
 	
 	var random_position = SPAWN_PIECES_POSITIONS[randi_range(0, 2)]
@@ -46,6 +49,12 @@ func _on_spawn_piece_timer_timeout() -> void:
 	randomize()
 	spawn_piece()
 
-
 func _on_damage_zone_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	if body.is_in_group("Pieces") and not piece_done_damage:
+		Global.enemy_lives -= 1
+		if not Global.enemy_lives == 0:
+			piece_done_damage = true
+			get_tree().reload_current_scene()
+		else:
+			await Global.update_result_title(true)
+			get_tree().change_scene_to_file("res://scenes/result_menu.tscn")

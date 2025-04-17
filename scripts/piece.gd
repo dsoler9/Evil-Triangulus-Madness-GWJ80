@@ -81,5 +81,9 @@ func update_shadow_position():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Ground":
-		print("piece touched ground")
 		Global.player_lives -= 1
+		if not Global.player_lives == 0:
+			get_tree().reload_current_scene()
+		else:
+			await Global.update_result_title(false)
+			get_tree().change_scene_to_file("res://scenes/result_menu.tscn")

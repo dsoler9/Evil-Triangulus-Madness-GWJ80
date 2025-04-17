@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3y1tgbp7c8lg"]
+[gd_scene load_steps=20 format=3 uid="uid://d3y1tgbp7c8lg"]
 
 [ext_resource type="Script" uid="uid://cqt14mrn4aipo" path="res://scripts/game_manager.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cfvic4a0uhu8y" path="res://scenes/rectangle_piece.tscn" id="3_iywne"]
@@ -21,6 +21,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(214, 125)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ca42v"]
 
 [node name="Game" type="Node2D"]
 
@@ -80,4 +82,12 @@ wait_time = 4.0
 [node name="Delay" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="DamageZone" type="Area2D" parent="."]
+position = Vector2(946, 138)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
+shape = SubResource("WorldBoundaryShape2D_ca42v")
+
 [connection signal="timeout" from="SpawnPieceTimer" to="GameManager" method="_on_spawn_piece_timer_timeout"]
+[connection signal="body_entered" from="DamageZone" to="GameManager" method="_on_damage_zone_body_entered"]

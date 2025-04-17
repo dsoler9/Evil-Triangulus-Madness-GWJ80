@@ -8,6 +8,7 @@ const SPAWN_PIECES_POSITIONS = [192.0, 576.0, 1344.0, 1728.0]
 @onready var spawn_piece_timer: Timer = $"../SpawnPieceTimer"
 @onready var evil_triangulus: Sprite2D = $EvilTriangulus
 @onready var delay: Timer = $"../Delay"
+@onready var enemy_ui: CanvasLayer = $EnemyUI
 
 var current_piece: RigidBody2D = null
 
@@ -44,3 +45,7 @@ func _on_piece_placed():
 func _on_spawn_piece_timer_timeout() -> void:
 	randomize()
 	spawn_piece()
+
+
+func _on_damage_zone_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

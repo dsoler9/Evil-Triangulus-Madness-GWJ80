@@ -79,8 +79,7 @@ func update_shadow_position():
 	else:
 		shadow_sprite.visible = false
 
-
-func _on_body_entered(body: Node) -> void:
+func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Ground":
+		print("piece touched ground")
 		Global.player_lives -= 1
-		#get_tree().reload_current_scene()

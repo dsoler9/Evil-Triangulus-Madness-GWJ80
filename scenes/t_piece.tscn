@@ -71,3 +71,10 @@ visible = false
 modulate = Color(0, 0, 0, 0.619608)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("2_t4q8k")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-25, -49, -25, 0, -74, 0, -74, 49, 74, 49, 74, 0, 25, 0, 25, -49)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

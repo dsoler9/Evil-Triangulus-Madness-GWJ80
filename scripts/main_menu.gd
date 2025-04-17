@@ -10,6 +10,7 @@ func _ready():
 	current_color = random_color()
 	target_color = random_color()
 	background.color = current_color
+	Global.player_lives = 3
 
 func _process(delta):
 	current_color = current_color.lerp(target_color, delta * transition_speed)

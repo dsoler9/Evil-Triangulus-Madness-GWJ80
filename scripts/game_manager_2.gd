@@ -1,24 +1,17 @@
 extends Node
 
-const SPAWN_PIECES_POSITIONS = [192.0, 576.0, 1344.0, 1728.0]
+const SPAWN_FOOD_POSITIONS = [192.0, 576.0, 960.0, 1344.0, 1728.0]
 
-@onready var mouse_cursor: Sprite2D = $MouseCursor
 @export var piece_scenes: Array[PackedScene] = []
+@export var current_fall_speed = 200
 @onready var pieces_node: Node2D = $"../Pieces"
 @onready var spawn_piece_timer: Timer = $"../SpawnPieceTimer"
-@onready var evil_triangulus: Sprite2D = $EvilTriangulus
-@onready var delay: Timer = $"../Delay"
 
 var current_piece: RigidBody2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	spawn_piece_timer.start()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	mouse_cursor.global_position = get_viewport().get_mouse_position()
 
 func spawn_piece():
 	if piece_scenes.is_empty():
@@ -31,9 +24,8 @@ func spawn_piece():
 	var new_piece = scene.instantiate()
 	pieces_node.add_child(new_piece)
 	
-	var random_position = SPAWN_PIECES_POSITIONS[randi_range(0, 2)]
-	evil_triangulus.global_position = Vector2(random_position, 200)
-	new_piece.global_position = Vector2(random_position, 300)
+	var random_position = SPAWN_FOOD_POSITIONS[randi_range(0, 2)]
+	new_piece.global_position = Vector2(random_position, 200)
 	
 	new_piece.connect("piece_placed", Callable(self, "_on_piece_placed"))
 	current_piece = new_piece

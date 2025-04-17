@@ -47,7 +47,7 @@ _data = {
 
 [node name="LargeSquarePiece" type="RigidBody2D"]
 input_pickable = true
-mass = 15.0
+mass = 5.0
 script = ExtResource("1_5efwj")
 metadata/_edit_group_ = true
 

@@ -44,7 +44,7 @@ _data = {
 
 [node name="TPiece" type="RigidBody2D"]
 input_pickable = true
-mass = 15.0
+mass = 5.0
 script = ExtResource("1_fp3rx")
 metadata/_edit_group_ = true
 

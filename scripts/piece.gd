@@ -1,10 +1,12 @@
 extends RigidBody2D
 
 var grabbed := false
+var dropped := false
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var grab_sound: AudioStreamPlayer2D = $GrabSound
 @onready var drop_ray_cast: RayCast2D = $DropRayCast
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
+@export var fall_speed = 150.0
 
 const GRAB_Y_LIMIT = 200
 
@@ -18,9 +20,10 @@ func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				var mouse_pos = get_viewport().get_mouse_position()
-				if mouse_pos.y <= GRAB_Y_LIMIT:
-					grab()
+				grab()
+				#var mouse_pos = get_viewport().get_mouse_position()
+				#if mouse_pos.y <= GRAB_Y_LIMIT:
+					
 			else:
 				drop()
 
@@ -28,14 +31,13 @@ func _physics_process(delta):
 	if grabbed:
 		var mouse_pos = get_global_mouse_position()
 		
-		if mouse_pos.y > GRAB_Y_LIMIT:
-			mouse_pos.y = GRAB_Y_LIMIT
+		#if mouse_pos.y > GRAB_Y_LIMIT:
+			#mouse_pos.y = GRAB_Y_LIMIT
 		
 		if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			drop()
 		
 		if Input.is_action_just_pressed("rotate"):
-			print("rotate")
 			rotate(deg_to_rad(90))
 			drop_ray_cast.rotate(deg_to_rad(-90))
 		
@@ -46,7 +48,8 @@ func _physics_process(delta):
 			
 			# Reposicionar la sombra justo ENCIMA del punto de colisión
 			shadow_sprite.global_position = hit_pos - Vector2(0, shadow_height)
-	
+	if not dropped:
+		linear_velocity.y = fall_speed
 
 func grab():
 	#print("grab")
@@ -58,12 +61,14 @@ func grab():
 
 func drop():
 	#print("drop")
+	dropped = true
 	grabbed = false
 	freeze = false
 	input_pickable = false
 	animations.stop()
 	#grab_sound.stop()
 	shadow_sprite.visible = false
+	linear_velocity = Vector2.ZERO
 	emit_signal("piece_placed")
 	
 func update_shadow_position():
@@ -73,3 +78,9 @@ func update_shadow_position():
 		shadow_sprite.visible = true
 	else:
 		shadow_sprite.visible = false
+
+
+func _on_body_entered(body: Node) -> void:
+	if body.name == "Ground":
+		Global.player_lives -= 1
+		#get_tree().reload_current_scene()

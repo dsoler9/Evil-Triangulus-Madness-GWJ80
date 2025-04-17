@@ -47,7 +47,7 @@ _data = {
 
 [node name="SquarePiece" type="RigidBody2D"]
 input_pickable = true
-mass = 15.0
+mass = 5.0
 script = ExtResource("1_s58gp")
 metadata/_edit_group_ = true
 
@@ -75,3 +75,5 @@ visible = false
 modulate = Color(0, 0, 0, 0.619608)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("2_h2rng")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bacujhuoal8n3"]
+
+[ext_resource type="Script" uid="uid://bnmojo23yhkot" path="res://scripts/player_ui.gd" id="1_48xfa"]
+[ext_resource type="Texture2D" uid="uid://dqb2w5mcwcrb7" path="res://assets/menu/heart_full.png" id="2_8isll"]
+[ext_resource type="Texture2D" uid="uid://bj08xyqbx64wt" path="res://assets/menu/heart_empty.png" id="3_7ctsh"]
+
+[node name="PlayerUI" type="CanvasLayer"]
+script = ExtResource("1_48xfa")
+full_heart = ExtResource("2_8isll")
+empty_heart = ExtResource("3_7ctsh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.489
+anchor_right = 0.524
+anchor_bottom = 0.018
+offset_left = -899.88
+offset_top = 16.0
+offset_right = -707.08
+offset_bottom = 76.56
+grow_horizontal = 2
+
+[node name="Heart1" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_8isll")
+
+[node name="Heart2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_8isll")
+
+[node name="Heart3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_8isll")

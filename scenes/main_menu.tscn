@@ -1,7 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://bar57oyk6qong"]
+[gd_scene load_steps=9 format=3 uid="uid://bar57oyk6qong"]
 
 [ext_resource type="Script" uid="uid://ubxtqfmgy6r2" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://ct6fsh4ai4e1c" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/mad_triangle/crazy_triangle_v2.png" id="3_bqqt6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu84c"]
+atlas = ExtResource("3_bqqt6")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ln24"]
+atlas = ExtResource("3_bqqt6")
+region = Rect2(2048, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtw2f"]
+atlas = ExtResource("3_bqqt6")
+region = Rect2(4096, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oa1go"]
+atlas = ExtResource("3_bqqt6")
+region = Rect2(6144, 0, 2048, 2048)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oa1go"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu84c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ln24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtw2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa1go")
+}],
+"loop": true,
+"name": &"crazy",
+"speed": 8.0
+}]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -58,3 +95,11 @@ theme_override_fonts/normal_font = ExtResource("2_ekxnf")
 bbcode_enabled = true
 text = "[pulse]START[/pulse]"
 fit_content = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1337, 708)
+scale = Vector2(0.215088, 0.215088)
+sprite_frames = SubResource("SpriteFrames_oa1go")
+animation = &"crazy"
+autoplay = "crazy"
+frame_progress = 0.737688

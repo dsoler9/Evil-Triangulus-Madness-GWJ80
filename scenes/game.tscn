@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3y1tgbp7c8lg"]
+[gd_scene load_steps=31 format=3 uid="uid://d3y1tgbp7c8lg"]
 
 [ext_resource type="Script" uid="uid://cqt14mrn4aipo" path="res://scripts/game_manager.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cfvic4a0uhu8y" path="res://scenes/rectangle_piece.tscn" id="3_iywne"]
@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bacujhuoal8n3" path="res://scenes/player_ui.tscn" id="9_kvuet"]
 [ext_resource type="PackedScene" uid="uid://cy71q0uelvtaq" path="res://scenes/enemy_ui.tscn" id="10_trtic"]
 [ext_resource type="Texture2D" uid="uid://xojy0x0ct6p2" path="res://assets/characters/evil_triangulus.png" id="11_ir15t"]
+[ext_resource type="Texture2D" uid="uid://b20wssmmr32hv" path="res://assets/backgrounds/city 5/7.png" id="12_rysoc"]
 [ext_resource type="Texture2D" uid="uid://dwfl2y0ghhw3d" path="res://assets/characters/platform_rock.png" id="13_ir15t"]
+[ext_resource type="AudioStream" uid="uid://b7n7o8i1jds26" path="res://assets/sounds/explosion.wav" id="17_rysoc"]
 
 [sub_resource type="GDScript" id="GDScript_ir15t"]
 script/source = "extends Sprite2D
@@ -63,9 +65,115 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(233, 100)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ca42v"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rysoc"]
+size = Vector2(146, 55.9996)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rysoc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.820158, 0.201706, 0.288881, 1)
+
+[sub_resource type="Animation" id="Animation_ca42v"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeLayer/BackgroundFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rysoc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageZone/Panel:theme_override_styles/panel:border_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.820158, 0.201706, 0.288881, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeLayer/BackgroundFade:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ssvqc"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeLayer/BackgroundFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_264po"]
+resource_name = "border_blink"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageZone/Panel:theme_override_styles/panel:border_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.820158, 0.201706, 0.288881, 1), Color(0.819608, 0.2, 0.290196, 0.521569)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssvqc"]
+_data = {
+&"RESET": SubResource("Animation_rysoc"),
+&"border_blink": SubResource("Animation_264po"),
+&"fade_in": SubResource("Animation_ca42v"),
+&"fade_out": SubResource("Animation_ssvqc")
+}
 
 [node name="Game" type="Node2D"]
+
+[node name="Pieces" type="Node2D" parent="."]
+
+[node name="FadeLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="BackgroundFade" type="ColorRect" parent="FadeLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_lbhrr")
@@ -87,10 +195,15 @@ scale = Vector2(2.5625, 2.5625)
 texture = ExtResource("11_ir15t")
 script = SubResource("GDScript_ir15t")
 
+[node name="GameBackground" type="TextureRect" parent="."]
+z_index = -1
+offset_right = 1920.0
+offset_bottom = 1079.0
+texture = ExtResource("12_rysoc")
+expand_mode = 1
+
 [node name="PauseMenu" parent="." instance=ExtResource("6_0tnpc")]
 visible = false
-
-[node name="Pieces" type="Node2D" parent="."]
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(960, 1080)
@@ -114,6 +227,7 @@ position = Vector2(0.5, -1)
 shape = SubResource("RectangleShape2D_iywne")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="GrabLimitLine" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("7_u5sy4")
@@ -128,10 +242,27 @@ wait_time = 0.5
 [node name="DamageZone" type="Area2D" parent="."]
 position = Vector2(960, 172)
 rotation = 3.14159
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
-shape = SubResource("WorldBoundaryShape2D_ca42v")
+position = Vector2(-1.99994, 12)
+shape = SubResource("RectangleShape2D_rysoc")
+
+[node name="Panel" type="Panel" parent="DamageZone"]
+offset_left = -77.0
+offset_top = -18.0
+offset_right = 73.0
+offset_bottom = 42.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rysoc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ssvqc")
+}
+
+[node name="HurtEnemySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_rysoc")
+bus = &"SFX"
 
 [connection signal="timeout" from="SpawnPieceTimer" to="GameManager" method="_on_spawn_piece_timer_timeout"]
 [connection signal="body_entered" from="DamageZone" to="GameManager" method="_on_damage_zone_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="GameManager" method="_on_animation_player_animation_finished"]

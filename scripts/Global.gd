@@ -3,6 +3,7 @@ extends Node
 var player_lives = 3
 var enemy_lives = 3
 var result_title_text: String
+var current_background = preload("res://assets/backgrounds/city 5/7.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

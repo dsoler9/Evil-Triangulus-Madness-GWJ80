@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7kgf8jp4vvfn"
+path="res://.godot/imported/Galaxy trip.mp3-7a638a114bb514a70e68e63d94b4d4b4.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Galaxy trip.mp3"
+dest_files=["res://.godot/imported/Galaxy trip.mp3-7a638a114bb514a70e68e63d94b4d4b4.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

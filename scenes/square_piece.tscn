@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1jdv6tkoji6m"]
+[gd_scene load_steps=11 format=3 uid="uid://b1jdv6tkoji6m"]
 
 [ext_resource type="Script" uid="uid://d1gtlnfy1but8" path="res://scripts/piece.gd" id="1_s58gp"]
 [ext_resource type="Texture2D" uid="uid://cd1ly58pse1o4" path="res://assets/pieces/square.png" id="2_h2rng"]
 [ext_resource type="AudioStream" uid="uid://c7dfetxl22uvc" path="res://assets/sounds/window-squeek-83224.mp3" id="3_h2rng"]
+[ext_resource type="AudioStream" uid="uid://dqtkhlcqou18f" path="res://assets/sounds/hurt.wav" id="4_csa4g"]
+[ext_resource type="AudioStream" uid="uid://b6hci87eyqll3" path="res://assets/sounds/pop-1-269287.mp3" id="5_oll34"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(48, 48)
@@ -85,6 +87,15 @@ texture = ExtResource("2_h2rng")
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_fsycg")
 debug_color = Color(0.991938, 0, 0.258897, 0.42)
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_csa4g")
+bus = &"SFX"
+
+[node name="PiecePlacedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_oll34")
+volume_db = 10.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

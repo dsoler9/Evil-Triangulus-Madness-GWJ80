@@ -7,10 +7,13 @@ var dropped := false
 @onready var drop_ray_cast: RayCast2D = $DropRayCast
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
 @export var fall_speed = 150.0
+@onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
+@onready var piece_placed_sound: AudioStreamPlayer2D = $PiecePlacedSound
 
 const GRAB_Y_LIMIT = 200
 
 signal piece_placed
+signal player_should_lose_life
 
 func _ready() -> void:
 	get_parent().add_child(shadow_sprite)
@@ -57,7 +60,7 @@ func grab():
 	grabbed = true
 	freeze = true
 	animations.play("grabbed")
-	#grab_sound.play()
+	grab_sound.play()
 	shadow_sprite.visible = true
 
 func drop():
@@ -67,7 +70,7 @@ func drop():
 	freeze = false
 	input_pickable = false
 	animations.stop()
-	#grab_sound.stop()
+	grab_sound.stop()
 	shadow_sprite.visible = false
 	linear_velocity = Vector2.ZERO
 	emit_signal("piece_placed")
@@ -82,12 +85,16 @@ func update_shadow_position():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Ground":
+		hurt_sound.play()
+		await get_tree().create_timer(0.2).timeout
 		Global.player_lives -= 1
 		if not Global.player_lives == 0:
 			get_tree().reload_current_scene()
 		else:
 			await Global.update_result_title(false)
 			get_tree().change_scene_to_file("res://scenes/result_menu.tscn")
+	else:
+		piece_placed_sound.play()
 
 func update_fall_speed() -> void:
 	match Global.enemy_lives:

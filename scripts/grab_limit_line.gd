@@ -25,19 +25,19 @@ func _draw():
 		)
 		x += DASH_LENGTH + SPACE_LENGTH
 		
-	var text := "DROP ZONE"
-	if font:
-		var text_size = font.get_string_size(text)
-		var pos = Vector2(
-			(viewport_width - text_size.x) / 2,
-			GRAB_Y_LIMIT - 10  # Un poco por encima de la línea
-		)
-		
-		# Sombra
-		draw_string(font, pos + Vector2(1, 1), text, HORIZONTAL_ALIGNMENT_CENTER, -1, 30, SHADOW_COLOR)
-		
-		# Texto principal
-		draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_CENTER, -1, 30, TEXT_COLOR)
-		
+	#var text := "DROP ZONE"
+	#if font:
+		#var text_size = font.get_string_size(text)
+		#var pos = Vector2(
+			#(viewport_width - text_size.x) / 2,
+			#GRAB_Y_LIMIT - 10  # Un poco por encima de la línea
+		#)
+		#
+		## Sombra
+		#draw_string(font, pos + Vector2(1, 1), text, HORIZONTAL_ALIGNMENT_CENTER, -1, 30, SHADOW_COLOR)
+		#
+		## Texto principal
+		#draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_CENTER, -1, 30, TEXT_COLOR)
+		#
 		
 		

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfogh5si7x0nc"
+path="res://.godot/imported/Battle for Extranite.mp3-59efa9adc92adb71196ca93c791e5505.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Battle for Extranite.mp3"
+dest_files=["res://.godot/imported/Battle for Extranite.mp3-59efa9adc92adb71196ca93c791e5505.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

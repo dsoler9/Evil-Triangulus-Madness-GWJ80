@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://p3i2v8v4qdem"]
+[gd_scene load_steps=14 format=3 uid="uid://p3i2v8v4qdem"]
 
-[ext_resource type="Script" uid="uid://bgi5d2l65nms0" path="res://scenes/result_menu.gd" id="1_6do8i"]
+[ext_resource type="Script" uid="uid://bgi5d2l65nms0" path="res://scripts/result_menu.gd" id="1_6do8i"]
 [ext_resource type="FontFile" uid="uid://ct6fsh4ai4e1c" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_fc626"]
 [ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/characters/crazy_triangle_v2.png" id="3_h5jln"]
 [ext_resource type="Texture2D" uid="uid://c4lokrduwe4nq" path="res://assets/cursor/tilemap.png" id="4_h5jln"]
@@ -41,6 +41,94 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_fl5he"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ResultMenuMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-40.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackgroundFade:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_h5jln"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ResultMenuMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackgroundFade:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5kifo"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ResultMenuMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5kifo"]
+_data = {
+&"RESET": SubResource("Animation_fl5he"),
+&"fade_in": SubResource("Animation_h5jln"),
+&"fade_out": SubResource("Animation_5kifo")
+}
+
 [node name="ResultMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -49,6 +137,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6do8i")
+
+[node name="BackgroundFade" type="ColorRect" parent="."]
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -113,10 +212,19 @@ sprite_frames = SubResource("SpriteFrames_5ndsi")
 autoplay = "default"
 
 [node name="MouseCursor" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("4_h5jln")
 region_enabled = true
-region_rect = Rect2(255, 100.681, 16.673, 18.2035)
+region_rect = Rect2(289, 101, 16, 17.8845)
+
+[node name="ResultMenuMusic" type="AudioStreamPlayer2D" parent="."]
+volume_db = -40.0
+bus = &"Music"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5kifo")
+}
 
 [connection signal="pressed" from="ContinueBtn" to="." method="_on_continue_btn_pressed"]
 [connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]

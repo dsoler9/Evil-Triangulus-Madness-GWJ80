@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bwwrmw43sanqm"
+path="res://.godot/imported/Celtic Bashing.mp3-026f2f677f1442ea954450b59c0871f2.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Celtic Bashing.mp3"
+dest_files=["res://.godot/imported/Celtic Bashing.mp3-026f2f677f1442ea954450b59c0871f2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq7o0off1q02v"]
+
+[ext_resource type="AudioStream" uid="uid://bnjn6l6iar5u" path="res://assets/music/Deeper Street.mp3" id="1_ifwox"]
+[ext_resource type="Script" uid="uid://2mn8p5piw6vt" path="res://scripts/game_music.gd" id="2_vlhfq"]
+
+[node name="GameMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_ifwox")
+script = ExtResource("2_vlhfq")

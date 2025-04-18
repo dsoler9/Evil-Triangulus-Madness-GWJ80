@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxlvgftqdu7vm"]
+[gd_scene load_steps=9 format=3 uid="uid://bxlvgftqdu7vm"]
 
 [ext_resource type="Script" uid="uid://d1gtlnfy1but8" path="res://scripts/piece.gd" id="1_73f5w"]
 [ext_resource type="Texture2D" uid="uid://3qjor2bnrby5" path="res://assets/pieces/rhombus.png" id="2_x3uej"]
 [ext_resource type="AudioStream" uid="uid://c7dfetxl22uvc" path="res://assets/sounds/window-squeek-83224.mp3" id="3_ga1yy"]
+[ext_resource type="AudioStream" uid="uid://dqtkhlcqou18f" path="res://assets/sounds/hurt.wav" id="4_x3uej"]
+[ext_resource type="AudioStream" uid="uid://b6hci87eyqll3" path="res://assets/sounds/pop-1-269287.mp3" id="5_ga1yy"]
 
 [sub_resource type="Animation" id="Animation_h2rng"]
 length = 0.001
@@ -68,3 +70,12 @@ target_position = Vector2(0, 1000)
 
 [node name="DropGuideLine" type="Line2D" parent="."]
 points = PackedVector2Array(1, 0)
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_x3uej")
+bus = &"SFX"
+
+[node name="PiecePlacedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ga1yy")
+volume_db = 10.0
+bus = &"SFX"

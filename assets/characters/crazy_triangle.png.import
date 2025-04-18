@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xojy0x0ct6p2"
-path="res://.godot/imported/evil_triangulus.png-42ac5ea2038b134edf808a043f3b8d3e.ctex"
+uid="uid://bu6j6a1lsslf4"
+path="res://.godot/imported/crazy_triangle.png-61b25eda7f571912554b6b91a8eb32b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mad_triangle/evil_triangulus.png"
-dest_files=["res://.godot/imported/evil_triangulus.png-42ac5ea2038b134edf808a043f3b8d3e.ctex"]
+source_file="res://assets/characters/crazy_triangle.png"
+dest_files=["res://.godot/imported/crazy_triangle.png-61b25eda7f571912554b6b91a8eb32b0.ctex"]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ubxtqfmgy6r2" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://ct6fsh4ai4e1c" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_ekxnf"]
-[ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/mad_triangle/crazy_triangle_v2.png" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/characters/crazy_triangle_v2.png" id="3_bqqt6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu84c"]
 atlas = ExtResource("3_bqqt6")
@@ -61,15 +61,17 @@ color = Color(0.283856, 0.365504, 0.375415, 1)
 [node name="GameTitle" type="RichTextLabel" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 110.0
-offset_top = 146.0
-offset_right = 1400.0
-offset_bottom = 410.0
+offset_left = 353.0
+offset_top = 128.0
+offset_right = 1643.0
+offset_bottom = 521.0
 theme_override_fonts/normal_font = ExtResource("2_ekxnf")
 theme_override_font_sizes/normal_font_size = 130
 bbcode_enabled = true
-text = "[wave]CRAZY BRICKTOWER[/wave]"
+text = "[wave]EVIL TRIANGULUS MADNESS[/wave]"
 fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_group_ = true
 
 [node name="GameTitleShadow" type="RichTextLabel" parent="GameTitle"]
@@ -82,22 +84,43 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_ekxnf")
 theme_override_font_sizes/normal_font_size = 130
 bbcode_enabled = true
-text = "[wave]CRAZY BRICKTOWER[/wave]"
+text = "[wave]EVIL TRIANGULUS MADNESS[/wave]"
 fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="StartLabel" type="RichTextLabel" parent="."]
+z_index = 1
 layout_mode = 0
-offset_left = 626.0
-offset_top = 782.0
-offset_right = 707.0
-offset_bottom = 803.0
+offset_left = 960.0
+offset_top = 779.0
+offset_right = 1041.0
+offset_bottom = 800.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_ekxnf")
 bbcode_enabled = true
 text = "[pulse]START[/pulse]"
 fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartLabelShadow" type="RichTextLabel" parent="StartLabel"]
+visible = false
+z_index = -1
+layout_mode = 0
+offset_left = -4.0
+offset_right = 77.0
+offset_bottom = 21.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_ekxnf")
+bbcode_enabled = true
+text = "[pulse]START[/pulse]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1337, 708)
+position = Vector2(1588, 757)
 scale = Vector2(0.215088, 0.215088)
 sprite_frames = SubResource("SpriteFrames_oa1go")
 animation = &"crazy"

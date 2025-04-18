@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3y1tgbp7c8lg"]
+[gd_scene load_steps=23 format=3 uid="uid://d3y1tgbp7c8lg"]
 
 [ext_resource type="Script" uid="uid://cqt14mrn4aipo" path="res://scripts/game_manager.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cfvic4a0uhu8y" path="res://scenes/rectangle_piece.tscn" id="3_iywne"]
 [ext_resource type="PackedScene" uid="uid://b1jdv6tkoji6m" path="res://scenes/square_piece.tscn" id="3_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://c4lokrduwe4nq" path="res://assets/cursor/tilemap.png" id="3_lnu2h"]
-[ext_resource type="Texture2D" uid="uid://bki85iqf8uq0t" path="res://icon.svg" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://d0vhsil4b4vdq" path="res://scenes/large_rectangle_piece.tscn" id="4_vtaks"]
 [ext_resource type="PackedScene" uid="uid://kiax1iithvls" path="res://scenes/large_square_piece.tscn" id="5_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://0pdnbiwkpdcd" path="res://scenes/pause_menu.tscn" id="6_0tnpc"]
@@ -14,7 +13,8 @@
 [ext_resource type="FontFile" uid="uid://cqel0vg7huulo" path="res://assets/fonts/SairaCondensed-ExtraLight.ttf" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://bacujhuoal8n3" path="res://scenes/player_ui.tscn" id="9_kvuet"]
 [ext_resource type="PackedScene" uid="uid://cy71q0uelvtaq" path="res://scenes/enemy_ui.tscn" id="10_trtic"]
-[ext_resource type="Texture2D" uid="uid://xojy0x0ct6p2" path="res://assets/mad_triangle/evil_triangulus.png" id="11_ir15t"]
+[ext_resource type="Texture2D" uid="uid://xojy0x0ct6p2" path="res://assets/characters/evil_triangulus.png" id="11_ir15t"]
+[ext_resource type="Texture2D" uid="uid://dwfl2y0ghhw3d" path="res://assets/characters/platform_rock.png" id="13_ir15t"]
 
 [sub_resource type="GDScript" id="GDScript_ir15t"]
 script/source = "extends Sprite2D
@@ -38,8 +38,30 @@ func _on_tween_finished(target_pos: Vector2):
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e2o6t"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca42v"]
+atlas = ExtResource("13_ir15t")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
+atlas = ExtResource("13_ir15t")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ssvqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca42v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rysoc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.25
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
-size = Vector2(214, 125)
+size = Vector2(233, 100)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ca42v"]
 
@@ -50,7 +72,7 @@ script = ExtResource("1_lbhrr")
 piece_scenes = Array[PackedScene]([ExtResource("3_lbhrr"), ExtResource("3_iywne"), ExtResource("4_vtaks"), ExtResource("5_kvpfn"), ExtResource("6_dinhu"), ExtResource("7_kvuet")])
 
 [node name="MouseCursor" type="Sprite2D" parent="GameManager"]
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("3_lnu2h")
 region_enabled = true
 region_rect = Rect2(255, 100.681, 16.673, 18.2035)
@@ -78,18 +100,20 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_e2o6t")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(960, 1016)
+position = Vector2(952, 1027)
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(1.66406, 0.972656)
-texture = ExtResource("4_lbhrr")
+[node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="StaticBody2D"]
+scale = Vector2(3.78424, 2.21192)
+sprite_frames = SubResource("SpriteFrames_ssvqc")
+autoplay = "default"
+frame_progress = 0.370375
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.5, -1)
 shape = SubResource("RectangleShape2D_iywne")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="GrabLimitLine" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("7_u5sy4")

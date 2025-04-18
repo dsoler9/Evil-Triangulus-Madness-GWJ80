@@ -15,6 +15,7 @@ signal piece_placed
 func _ready() -> void:
 	get_parent().add_child(shadow_sprite)
 	shadow_sprite.owner = get_parent()
+	update_fall_speed()
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -87,3 +88,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		else:
 			await Global.update_result_title(false)
 			get_tree().change_scene_to_file("res://scenes/result_menu.tscn")
+
+func update_fall_speed() -> void:
+	match Global.enemy_lives:
+		3:
+			fall_speed = 150.0
+		2:
+			fall_speed += 150.0
+		1:
+			fall_speed += 300.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpm8wxbnxoy2r"
-path="res://.godot/imported/crazy_triangle_v2.png-a26d31cf4695ce2867d07ae58dfcc5f8.ctex"
+uid="uid://dwfl2y0ghhw3d"
+path="res://.godot/imported/platform_rock.png-e17b9ce1ee64cbc4cd834063ce8e580a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mad_triangle/crazy_triangle_v2.png"
-dest_files=["res://.godot/imported/crazy_triangle_v2.png-a26d31cf4695ce2867d07ae58dfcc5f8.ctex"]
+source_file="res://assets/characters/platform_rock.png"
+dest_files=["res://.godot/imported/platform_rock.png-e17b9ce1ee64cbc4cd834063ce8e580a.ctex"]
 
 [params]
 

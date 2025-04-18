@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgi5d2l65nms0" path="res://scenes/result_menu.gd" id="1_6do8i"]
 [ext_resource type="FontFile" uid="uid://ct6fsh4ai4e1c" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_fc626"]
-[ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/mad_triangle/crazy_triangle_v2.png" id="3_h5jln"]
+[ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/characters/crazy_triangle_v2.png" id="3_h5jln"]
 [ext_resource type="Texture2D" uid="uid://c4lokrduwe4nq" path="res://assets/cursor/tilemap.png" id="4_h5jln"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fl5he"]

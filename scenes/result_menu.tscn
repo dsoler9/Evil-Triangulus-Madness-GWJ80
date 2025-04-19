@@ -1,9 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://p3i2v8v4qdem"]
+[gd_scene load_steps=18 format=3 uid="uid://p3i2v8v4qdem"]
 
 [ext_resource type="Script" uid="uid://bgi5d2l65nms0" path="res://scripts/result_menu.gd" id="1_6do8i"]
 [ext_resource type="FontFile" uid="uid://ct6fsh4ai4e1c" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_fc626"]
+[ext_resource type="Texture2D" uid="uid://3l14fqhldyb6" path="res://assets/characters/evil_evil_triangulus.png" id="3_fl5he"]
 [ext_resource type="Texture2D" uid="uid://bpm8wxbnxoy2r" path="res://assets/characters/crazy_triangle_v2.png" id="3_h5jln"]
 [ext_resource type="Texture2D" uid="uid://c4lokrduwe4nq" path="res://assets/cursor/tilemap.png" id="4_h5jln"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ndsi"]
+atlas = ExtResource("3_fl5he")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdmj4"]
+atlas = ExtResource("3_fl5he")
+region = Rect2(2048, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndee2"]
+atlas = ExtResource("3_fl5he")
+region = Rect2(4096, 0, 2048, 2048)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fl5he"]
 atlas = ExtResource("3_h5jln")
@@ -23,6 +36,20 @@ region = Rect2(6144, 0, 2048, 2048)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5ndsi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ndsi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdmj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndee2")
+}],
+"loop": true,
+"name": &"bad",
+"speed": 6.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fl5he")
@@ -210,6 +237,7 @@ rotation = 0.261799
 scale = Vector2(0.271973, 0.271973)
 sprite_frames = SubResource("SpriteFrames_5ndsi")
 autoplay = "default"
+frame_progress = 0.636022
 
 [node name="MouseCursor" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)

@@ -4,6 +4,7 @@ extends Control
 @onready var result_title: RichTextLabel = $ResultTitle
 @onready var result_menu_music: AudioStreamPlayer2D = $ResultMenuMusic
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,8 +16,10 @@ func _ready() -> void:
 		result_title.text = Global.result_title_text
 	
 	if Global.enemy_lives == 0:
+		animated_sprite_2d.play("default")
 		result_menu_music.stream = preload("res://assets/music/Galaxy trip.mp3")
 	else:
+		animated_sprite_2d.play("bad")
 		result_menu_music.stream = preload("res://assets/music/Forgotten Heroes.mp3")
 		
 	result_menu_music.play()

@@ -261,7 +261,6 @@ scale = Vector2(2.5625, 2.5625)
 metadata/_edit_group_ = true
 
 [node name="EvilTriangulusAnimatedSprite" type="AnimatedSprite2D" parent="GameManager/EvilTriangulus"]
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_1kice")
 animation = &"idle"
 autoplay = "idle"
@@ -314,6 +313,7 @@ wait_time = 1.5
 [node name="DamageZone" type="Area2D" parent="."]
 position = Vector2(960, 172)
 rotation = 3.14159
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
 position = Vector2(-1.99994, 12)

@@ -29,9 +29,9 @@ func _process(delta):
 
 func random_color():
 	return Color(
-		0.3 + randf() * 0.7,  # R entre 0.3 y 1.0
-		0.3 + randf() * 0.7,  # G entre 0.3 y 1.0
-		0.3 + randf() * 0.7   # B entre 0.3 y 1.0
+		randf() * 0.5,  # R entre 0.3 y 1.0
+		randf() * 0.5,  # G entre 0.3 y 1.0
+		randf() * 0.5   # B entre 0.3 y 1.0
 	)
 
 func _input(event: InputEvent) -> void:
@@ -42,3 +42,5 @@ func _input(event: InputEvent) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_out":
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
+	if anim_name == "fade_in":
+		animation_player.play("tuto_animations")

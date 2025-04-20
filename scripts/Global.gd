@@ -16,10 +16,7 @@ func _process(delta: float) -> void:
 	pass
 
 func update_result_title(won: bool) -> void:
-	print(won)
 	if won:
 		result_title_text = "[wave][rainbow freq=0.3]YOU WON[/rainbow][/wave]\nAGAINST[shake rate=20.0 level=20][color=#a020f0]\nEVIL TRIANGULUS[/color][/shake]"
 	else:
 		result_title_text = "[shake rate=20.0 level=20][color=#ff0000]YOU LOSE[/color][/shake][color=orange]\nAGAINST[/color][shake rate=20.0 level=20][color=yellow]\nEVIL TRIANGULUS[/color][/shake]"
-	
-	print(result_title_text)

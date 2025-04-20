@@ -244,6 +244,7 @@ grow_vertical = 2
 color = Color(0.283856, 0.365504, 0.375415, 1)
 
 [node name="BackgroundFade" type="ColorRect" parent="."]
+visible = false
 z_index = 5
 layout_mode = 1
 anchors_preset = 15
@@ -339,6 +340,7 @@ You must reach the [color=red][shake]red area[/shake][/color] to deal damage to 
 "
 
 [node name="DamageZonePanel" type="Panel" parent="TutoPanel"]
+layout_mode = 0
 offset_left = 194.0
 offset_top = 735.0
 offset_right = 344.0

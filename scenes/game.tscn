@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d3y1tgbp7c8lg"]
+[gd_scene load_steps=35 format=3 uid="uid://d3y1tgbp7c8lg"]
 
 [ext_resource type="Script" uid="uid://cqt14mrn4aipo" path="res://scripts/game_manager.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cfvic4a0uhu8y" path="res://scenes/rectangle_piece.tscn" id="3_iywne"]
@@ -13,13 +13,33 @@
 [ext_resource type="FontFile" uid="uid://cqel0vg7huulo" path="res://assets/fonts/SairaCondensed-ExtraLight.ttf" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://bacujhuoal8n3" path="res://scenes/player_ui.tscn" id="9_kvuet"]
 [ext_resource type="PackedScene" uid="uid://cy71q0uelvtaq" path="res://scenes/enemy_ui.tscn" id="10_trtic"]
-[ext_resource type="Texture2D" uid="uid://xojy0x0ct6p2" path="res://assets/characters/evil_triangulus.png" id="11_ir15t"]
+[ext_resource type="Texture2D" uid="uid://bnv61bwhil2fq" path="res://assets/characters/evil_triangulus1.png" id="11_ssvqc"]
+[ext_resource type="Texture2D" uid="uid://cbgbsqapt4e8t" path="res://assets/characters/evil_triangulus2.png" id="12_264po"]
 [ext_resource type="Texture2D" uid="uid://b20wssmmr32hv" path="res://assets/backgrounds/city 5/7.png" id="12_rysoc"]
 [ext_resource type="Texture2D" uid="uid://dwfl2y0ghhw3d" path="res://assets/characters/platform_rock.png" id="13_ir15t"]
 [ext_resource type="AudioStream" uid="uid://b7n7o8i1jds26" path="res://assets/sounds/explosion.wav" id="17_rysoc"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_1kice"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ssvqc")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_264po")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [sub_resource type="GDScript" id="GDScript_ir15t"]
-script/source = "extends Sprite2D
+script/source = "extends AnimatedSprite2D
 
 const SPAWN_POSITIONS = [Vector2(192, 100), Vector2(576, 100), Vector2(1344, 100), Vector2(1728, 100)]
 
@@ -76,6 +96,10 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.820158, 0.201706, 0.288881, 1)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ssvqc"]
+a = Vector2(-99, 1)
+b = Vector2(102, 1)
+
 [sub_resource type="Animation" id="Animation_rysoc"]
 length = 0.001
 tracks/0/type = "value"
@@ -101,6 +125,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameManager/EvilTriangulus/EvilTriangulusAnimatedSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_264po"]
@@ -151,12 +187,42 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_1kice"]
+resource_name = "triangulus_floating"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameManager/EvilTriangulus/EvilTriangulusAnimatedSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageZone/Panel:theme_override_styles/panel:border_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.819608, 0.2, 0, 1), Color(0.819608, 0.2, 0, 0.545098)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ssvqc"]
 _data = {
 &"RESET": SubResource("Animation_rysoc"),
 &"border_blink": SubResource("Animation_264po"),
 &"fade_in": SubResource("Animation_ca42v"),
-&"fade_out": SubResource("Animation_ssvqc")
+&"fade_out": SubResource("Animation_ssvqc"),
+&"triangulus_floating": SubResource("Animation_1kice")
 }
 
 [node name="Game" type="Node2D"]
@@ -189,10 +255,16 @@ region_rect = Rect2(255, 100.681, 16.673, 18.2035)
 
 [node name="EnemyUI" parent="GameManager" instance=ExtResource("10_trtic")]
 
-[node name="EvilTriangulus" type="Sprite2D" parent="GameManager"]
+[node name="EvilTriangulus" type="Node2D" parent="GameManager"]
 position = Vector2(960, 68)
 scale = Vector2(2.5625, 2.5625)
-texture = ExtResource("11_ir15t")
+metadata/_edit_group_ = true
+
+[node name="EvilTriangulusAnimatedSprite" type="AnimatedSprite2D" parent="GameManager/EvilTriangulus"]
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_1kice")
+animation = &"idle"
+autoplay = "idle"
 script = SubResource("GDScript_ir15t")
 
 [node name="GameBackground" type="TextureRect" parent="."]
@@ -236,8 +308,8 @@ font = ExtResource("8_gee14")
 [node name="SpawnPieceTimer" type="Timer" parent="."]
 wait_time = 4.0
 
-[node name="Delay" type="Timer" parent="."]
-wait_time = 0.5
+[node name="TorreCheckTimer" type="Timer" parent="."]
+wait_time = 1.5
 
 [node name="DamageZone" type="Area2D" parent="."]
 position = Vector2(960, 172)
@@ -254,6 +326,30 @@ offset_right = 73.0
 offset_bottom = 42.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rysoc")
 
+[node name="TowerCheckpoint1" type="Area2D" parent="."]
+position = Vector2(955, 714)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerCheckpoint1"]
+shape = SubResource("SegmentShape2D_ssvqc")
+debug_color = Color(0.858824, 0, 0, 0.419608)
+
+[node name="TowerCheckpoint2" type="Area2D" parent="."]
+position = Vector2(959, 460)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerCheckpoint2"]
+shape = SubResource("SegmentShape2D_ssvqc")
+debug_color = Color(0.858824, 0, 0, 0.419608)
+
+[node name="TowerCheckpoint3" type="Area2D" parent="."]
+position = Vector2(960, 227)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerCheckpoint3"]
+shape = SubResource("SegmentShape2D_ssvqc")
+debug_color = Color(0.858824, 0, 0, 0.419608)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_ssvqc")
@@ -264,5 +360,10 @@ stream = ExtResource("17_rysoc")
 bus = &"SFX"
 
 [connection signal="timeout" from="SpawnPieceTimer" to="GameManager" method="_on_spawn_piece_timer_timeout"]
+[connection signal="timeout" from="TorreCheckTimer" to="GameManager" method="_on_torre_check_timer_timeout"]
 [connection signal="body_entered" from="DamageZone" to="GameManager" method="_on_damage_zone_body_entered"]
+[connection signal="body_entered" from="TowerCheckpoint1" to="GameManager" method="_on_tower_checkpoint_1_body_entered"]
+[connection signal="body_exited" from="TowerCheckpoint1" to="GameManager" method="_on_tower_checkpoint_1_body_exited"]
+[connection signal="body_entered" from="TowerCheckpoint2" to="GameManager" method="_on_tower_checkpoint_2_body_entered"]
+[connection signal="body_entered" from="TowerCheckpoint3" to="GameManager" method="_on_tower_checkpoint_3_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="GameManager" method="_on_animation_player_animation_finished"]

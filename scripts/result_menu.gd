@@ -33,6 +33,7 @@ func _process(delta: float) -> void:
 func _on_continue_btn_pressed() -> void:
 	Global.player_lives = 3
 	Global.enemy_lives = 3
+	Global.current_background = preload("res://assets/backgrounds/city 5/7.png")
 	animation_player.play("fade_out")
 	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://scenes/game.tscn")

@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var continue_btn: Button = $VBoxContainer/TextureRect/ContinueBtn
 @onready var enter_pause_sound: AudioStreamPlayer2D = $EnterPauseSound
 @onready var change_focus_btn_sound: AudioStreamPlayer2D = $ChangeFocusBtnSound
+@onready var continue_btn: Button = $ContinueBtn
 
 var can_play = false
 

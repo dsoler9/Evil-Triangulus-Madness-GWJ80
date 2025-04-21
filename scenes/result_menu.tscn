@@ -236,8 +236,8 @@ position = Vector2(1548, 739)
 rotation = 0.261799
 scale = Vector2(0.271973, 0.271973)
 sprite_frames = SubResource("SpriteFrames_5ndsi")
+animation = &"bad"
 autoplay = "default"
-frame_progress = 0.636022
 
 [node name="MouseCursor" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)

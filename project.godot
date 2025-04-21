@@ -13,6 +13,8 @@ config_version=5
 config/name="Evil Triangulus Madness"
 run/main_scene="uid://bar57oyk6qong"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0.0637651, 0.0730735, 0.123617, 1)
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,6 +26,7 @@ GameMusic="*res://scenes/game_music.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
